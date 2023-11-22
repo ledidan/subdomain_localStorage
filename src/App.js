@@ -28,7 +28,6 @@ class App extends React.Component {
     const uuid = localStorage.getItem("uuid");
     // Post a message to the subdomain
     subdomainFrame.contentWindow.postMessage(
-      {type: "UUID_MESSAGE", uuid},
       "https://www.skiplisalon.com"
     );
 
