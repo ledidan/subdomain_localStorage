@@ -20,20 +20,21 @@ class App extends React.Component {
       // If UUID exists, use it
       this.setState({ uuid: storedUUID });
     }
-    // else {
-    //   // If UUID doesn't exist, generate a new one and save it to local storage
-    //   const newUUID = uuidv4();
-    //   localStorage.setItem("uuid", newUUID);
-    //   this.setState({ uuid: newUUID });
-    // }
   }
 
   sendMessageToSubdomain = () => {
-    window.top.postMessage("Received From the root domain!", "https://www.skiplisalon.com");
+    // Get the iframe element
+    const subdomainFrame = document.getElementById("subdomain-frame");
+    const uuid = localStorage.getItem("uuid");
+    // Post a message to the subdomain
+    subdomainFrame.contentWindow.postMessage(
+      {type: "UUID_MESSAGE", uuid},
+      "https://www.skiplisalon.com"
+    );
+
   };
   render() {
     const { uuid } = this.state;
-
     return (
       <div className="App">
         <header className="App-header">
@@ -41,7 +42,12 @@ class App extends React.Component {
           <h1>SUB DOMAIN SKIPLI LOCAL STORAGE</h1>
           <p>UUID: {uuid}</p>
         </header>
-
+        <iframe
+        style={{ display: 'none' }}
+          id="subdomain-frame"
+          title="Subdomain Frame"
+          src="https://www.skiplisalon.com"
+        ></iframe>
       </div>
     );
   }
