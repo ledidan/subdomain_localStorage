@@ -27,11 +27,7 @@ class App extends React.Component {
     const subdomainFrame = document.getElementById("subdomain-frame");
     const uuid = localStorage.getItem("uuid");
     // Post a message to the subdomain
-    subdomainFrame.contentWindow.postMessage(
-      {type: "UUID_MESSAGE", uuid},
-      "https://www.skiplisalon.com"
-    );
-
+    subdomainFrame.contentWindow.postMessage("https://www.skiplisalon.com");
   };
   render() {
     const { uuid } = this.state;
@@ -43,6 +39,7 @@ class App extends React.Component {
           <p>UUID: {uuid}</p>
         </header>
         <iframe
+          // style={{ display: "none" }}
           id="subdomain-frame"
           title="Subdomain Frame"
           src="https://www.skiplisalon.com"
