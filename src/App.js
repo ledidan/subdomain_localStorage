@@ -35,7 +35,7 @@ class App extends React.Component {
 
   handleMessage = (event) => {
     // Check the origin to ensure it's from a trusted root domain
-    if (event.origin === 'https://example.com') {
+    if (event.origin === 'https://www.skiplisalon.com') {
       console.log('Received message from root domain:', event.data);
 
       // Handle the data received from the root domain
