@@ -29,14 +29,7 @@ class App extends React.Component {
   }
 
   sendMessageToSubdomain = () => {
-    // Get the iframe element
-    const subdomainFrame = document.getElementById("subdomain-frame");
-
-    // Post a message to the subdomain
-    subdomainFrame.contentWindow.postMessage(
-      "Hello from the root domain!",
-      "https://www.skiplisalon.com"
-    );
+    window.top.postMessage("Received From the root domain!", "https://www.skiplisalon.com");
   };
   render() {
     const { uuid } = this.state;
@@ -48,6 +41,7 @@ class App extends React.Component {
           <h1>SUB DOMAIN SKIPLI LOCAL STORAGE</h1>
           <p>UUID: {uuid}</p>
         </header>
+
       </div>
     );
   }
