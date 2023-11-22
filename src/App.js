@@ -19,7 +19,19 @@ class App extends React.Component {
     if (storedUUID) {
       // If UUID exists, use it
       this.setState({ uuid: storedUUID });
-    } 
+    }
+    window.addEventListener("message", (event) => {
+      // Check the origin of the sender
+      if (event.origin === "https://www.skiplisalon.com") {
+        const data = event.data;
+
+        // Use the received data
+        console.log(data.key, data.value);
+
+        // Set the received data in localStorage if needed
+        localStorage.setItem(data.key, data.value);
+      }
+    });
     // else {
     //   // If UUID doesn't exist, generate a new one and save it to local storage
     //   const newUUID = uuidv4();
