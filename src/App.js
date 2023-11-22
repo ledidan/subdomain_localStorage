@@ -20,26 +20,27 @@ class App extends React.Component {
       // If UUID exists, use it
       this.setState({ uuid: storedUUID });
     }
-    window.addEventListener("message", (event) => {
-      // Check the origin of the sender
-      if (event.origin === "https://www.skiplisalon.com") {
-        const data = event.data;
-
-        // Use the received data
-        console.log(data.key, data.value);
-
-        // Set the received data in localStorage if needed
-        localStorage.setItem(data.key, data.value);
-      }
-    });
     // else {
     //   // If UUID doesn't exist, generate a new one and save it to local storage
     //   const newUUID = uuidv4();
     //   localStorage.setItem("uuid", newUUID);
     //   this.setState({ uuid: newUUID });
     // }
+    window.addEventListener('message', this.handleMessage);
+  }
+  componentWillUnmount() {
+    // Remove the event listener when the component is unmounted
+    window.removeEventListener('message', this.handleMessage);
   }
 
+  handleMessage = (event) => {
+    // Check the origin to ensure it's from a trusted root domain
+    if (event.origin === 'https://example.com') {
+      console.log('Received message from root domain:', event.data);
+
+      // Handle the data received from the root domain
+    }
+  };
   render() {
     const { uuid } = this.state;
 
