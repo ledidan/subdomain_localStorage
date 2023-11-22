@@ -15,7 +15,7 @@ class App extends React.Component {
   componentDidMount() {
     // Check if UUID is already in local storage
     const storedUUID = localStorage.getItem("uuid");
-
+    this.sendMessageToSubdomain();
     if (storedUUID) {
       // If UUID exists, use it
       this.setState({ uuid: storedUUID });
@@ -27,7 +27,6 @@ class App extends React.Component {
     //   this.setState({ uuid: newUUID });
     // }
   }
-
 
   sendMessageToSubdomain = () => {
     // Get the iframe element
@@ -49,16 +48,6 @@ class App extends React.Component {
           <h1>SUB DOMAIN SKIPLI LOCAL STORAGE</h1>
           <p>UUID: {uuid}</p>
         </header>
-        <div>
-          <button onClick={this.sendMessageToSubdomain}>
-            Received Message from Root Domain
-          </button>
-        </div>
-        <iframe
-            id="subdomain-frame"
-            title="Subdomain Frame"
-            src="https://www.skiplisalon.com"
-          ></iframe>
       </div>
     );
   }
