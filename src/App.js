@@ -26,20 +26,18 @@ class App extends React.Component {
     //   localStorage.setItem("uuid", newUUID);
     //   this.setState({ uuid: newUUID });
     // }
-    window.addEventListener('message', this.handleMessage);
-  }
-  componentWillUnmount() {
-    // Remove the event listener when the component is unmounted
-    window.removeEventListener('message', this.handleMessage);
   }
 
-  handleMessage = (event) => {
-    // Check the origin to ensure it's from a trusted root domain
-    if (event.origin === 'https://www.skiplisalon.com') {
-      console.log('Received message from root domain:', event.data);
 
-      // Handle the data received from the root domain
-    }
+  sendMessageToSubdomain = () => {
+    // Get the iframe element
+    const subdomainFrame = document.getElementById("subdomain-frame");
+
+    // Post a message to the subdomain
+    subdomainFrame.contentWindow.postMessage(
+      "Hello from the root domain!",
+      "https://www.skiplisalon.com"
+    );
   };
   render() {
     const { uuid } = this.state;
@@ -51,6 +49,16 @@ class App extends React.Component {
           <h1>SUB DOMAIN SKIPLI LOCAL STORAGE</h1>
           <p>UUID: {uuid}</p>
         </header>
+        <div>
+          <button onClick={this.sendMessageToSubdomain}>
+            Received Message from Root Domain
+          </button>
+        </div>
+        <iframe
+            id="subdomain-frame"
+            title="Subdomain Frame"
+            src="https://www.skiplisalon.com"
+          ></iframe>
       </div>
     );
   }
