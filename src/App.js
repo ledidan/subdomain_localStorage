@@ -20,6 +20,13 @@ class App extends React.Component {
   }
   handleMessage = (event) => {
     // Validate the origin of the message for security reasons
+    const subdomainFrame = document.getElementById("subdomain-frame");
+    const uuid = localStorage.getItem("uuid");
+    // Post a message to the subdomain
+    subdomainFrame.contentWindow.postMessage(
+      {type: "UUID_MESSAGE", uuid},
+      "https://www.skiplisalon.com"
+    );
     if (event.origin === "https://www.skiplisalon.com") {
       console.log("Received message from root domain:", event.data);
       console.log("Received message from root domain uuid:", event.data.uuid);
