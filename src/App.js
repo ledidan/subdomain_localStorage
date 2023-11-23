@@ -21,7 +21,7 @@ class App extends React.Component {
   handleMessage = (event) => {
     const subdomainFrame = document.getElementById("subdomain-frame");
     // Post a message to the subdomain
-    subdomainFrame.window.postMessage(
+    subdomainFrame.contentWindow.postMessage(
       event?.data,
       "https://www.skiplisalon.com"
     );
@@ -32,7 +32,6 @@ class App extends React.Component {
   };
 
   render() {
-    const { uuid } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -41,7 +40,14 @@ class App extends React.Component {
           <p>UUID: {localStorage.getItem("uuid")}</p>
         </header>
         <iframe
-          style={{ visibility: "hidden" }}
+          style={{
+            visibility: "hidden",
+            position: "absolute",
+            top: "-9999px",
+            left: "-9999px",
+            width: "1px",
+            height: "1px",
+          }}
           id="subdomain-frame"
           title="Subdomain Frame"
           src="https://www.skiplisalon.com"
