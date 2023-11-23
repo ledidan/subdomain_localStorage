@@ -27,7 +27,7 @@ class App extends React.Component {
     );
     if (event.origin === "https://www.skiplisalon.com") {
       this.setState({ uuid: event.data });
-      localStorage.setItem({ uuid: event.data });
+      localStorage.setItem("uuid", event.data);
     }
   };
 
@@ -38,7 +38,7 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1>SUB DOMAIN SKIPLI LOCAL STORAGE</h1>
-          <p>UUID: {uuid}</p>
+          <p>UUID: {localStorage.getItem("uuid")}</p>
         </header>
         <iframe
           id="subdomain-frame"
