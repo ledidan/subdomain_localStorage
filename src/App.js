@@ -15,20 +15,34 @@ class App extends React.Component {
   componentDidMount() {
     // Check if UUID is already in local storage
     const storedUUID = localStorage.getItem("uuid");
-    this.sendMessageToSubdomain();
+    window.addEventListener("message", this.handleMessage);
     if (storedUUID) {
       // If UUID exists, use it
       this.setState({ uuid: storedUUID });
     }
   }
+  componentWillUnmount() {
+    window.removeEventListener("message", this.handleMessage);
+  }
+  handleMessage = (event) => {
+    // Validate the origin of the message for security reasons
+    if (event.origin === "https://www.skiplisalon.com") {
+      console.log("Received message from root domain:", event.data);
+      console.log("Received message from root domain uuid:", event.data.uuid);
 
-  sendMessageToSubdomain = () => {
-    // Get the iframe element
-    const subdomainFrame = document.getElementById("subdomain-frame");
-    const uuid = localStorage.getItem("uuid");
-    // Post a message to the subdomain
-    subdomainFrame.contentWindow.postMessage("https://www.skiplisalon.com");
+      // Handle the data received from the root domain
+      const rootDomainUUID = event.data.uuid;
+
+      // Save the root domain UUID to local storage
+      localStorage.setItem("rootDomainUUID", rootDomainUUID);
+
+      // Optionally, you can update the state if needed
+      this.setState({ uuid: rootDomainUUID });
+
+      // Additional handling logic can be added here
+    }
   };
+
   render() {
     const { uuid } = this.state;
     return (
