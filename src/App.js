@@ -13,13 +13,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // Check if UUID is already in local storage
-    const storedUUID = localStorage.getItem("uuid");
     window.addEventListener("message", this.handleMessage);
-    if (storedUUID) {
-      // If UUID exists, use it
-      this.setState({ uuid: storedUUID });
-    }
   }
   componentWillUnmount() {
     window.removeEventListener("message", this.handleMessage);
@@ -38,8 +32,6 @@ class App extends React.Component {
 
       // Optionally, you can update the state if needed
       this.setState({ uuid: rootDomainUUID });
-
-      // Additional handling logic can be added here
     }
   };
 
