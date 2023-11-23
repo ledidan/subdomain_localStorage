@@ -22,9 +22,10 @@ class App extends React.Component {
     const subdomainFrame = document.getElementById("subdomain-frame");
     // Post a message to the subdomain
     subdomainFrame.contentWindow.postMessage(
+      event?.data,
       "https://www.skiplisalon.com"
     );
-    if (event?.data && event.origin === "https://www.skiplisalon.com") {
+    if (event.origin === "https://www.skiplisalon.com") {
       this.setState({ uuid: event.data });
     }
   };
