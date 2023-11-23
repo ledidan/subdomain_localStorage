@@ -24,7 +24,7 @@ class App extends React.Component {
     subdomainFrame.contentWindow.postMessage(
       "https://www.skiplisalon.com"
     );
-    if (event?.data) {
+    if (event?.data && event.origin === "https://www.skiplisalon.com") {
       this.setState({ uuid: event.data });
     }
   };
