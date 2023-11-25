@@ -23,9 +23,9 @@ class App extends React.Component {
     // Post a message to the subdomain
     subdomainFrame.contentWindow.postMessage(
       event?.data,
-      "https://www.skiplisalon.com"
+      "https://skiplisalon.com"
     );
-    if (event.origin === "https://www.skiplisalon.com") {
+    if (event.origin === "https://skiplisalon.com") {
       this.setState({ uuid: event.data });
       localStorage.setItem("uuid", event.data);
     }
@@ -50,7 +50,7 @@ class App extends React.Component {
           }}
           id="subdomain-frame"
           title="Subdomain Frame"
-          src="https://www.skiplisalon.com"
+          src="https://skiplisalon.com"
         ></iframe>
       </div>
     );
