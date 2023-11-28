@@ -1,5 +1,5 @@
 import React from "react";
-
+import { v4 as uuidv4 } from "uuid";
 import logo from "./logo.svg";
 import "./App.css";
 class App extends React.Component {
@@ -25,9 +25,18 @@ class App extends React.Component {
       event?.data,
       "https://skiplisalon.com"
     );
-    if (event.origin === "https://skiplisalon.com") {
+    if (event.origin === "https://skiplisalon.com" && event.data !== null) {
       this.setState({ uuid: event.data });
       localStorage.setItem("uuid", event.data);
+    } else {
+      const storedUuid = localStorage.getItem("uuid");
+      if (storedUuid) {
+        this.setState({ uuid: storedUuid });
+      } else {
+        const newUuid = uuidv4();
+        localStorage.setItem("uuid", newUuid);
+        this.setState({ uuid: newUuid });
+      }
     }
   };
 
