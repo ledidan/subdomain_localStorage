@@ -11,7 +11,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("message", this.handleMessage);
+    setTimeout(() => {
+      window.addEventListener("message", this.handleMessage);
+    }, 2000);
   }
 
   componentWillUnmount() {
