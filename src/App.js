@@ -12,12 +12,6 @@ class App extends React.Component {
 
   componentDidMount() {
     window.addEventListener("message", this.handleMessage);
-    const subdomainFrame = document.getElementById("subdomain-frame");
-    // Post a message to the subdomain
-    subdomainFrame.contentWindow.postMessage(
-      localStorage.getItem("uuid"),
-      "https://skiplisalon.com"
-    );
   }
 
   componentWillUnmount() {
@@ -25,6 +19,14 @@ class App extends React.Component {
   }
 
   handleMessage = (event) => {
+    const subdomainFrame = document.getElementById("subdomain-frame");
+    subdomainFrame.addEventListener("load", () => {
+      // Once the iframe is loaded, post the message
+      subdomainFrame.contentWindow.postMessage(
+        event?.data,
+        "https://skiplisalon.com"
+      );
+    });
     if (event.origin === "https://skiplisalon.com" && event.data !== null) {
       this.setState({ uuid: event.data });
       localStorage.setItem("uuid", event.data);
