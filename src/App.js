@@ -23,9 +23,9 @@ class App extends React.Component {
     console.log('event', event?.data);
     subdomainFrame.contentWindow.postMessage(
       event?.data,
-      "https://skipli-test-local-storage.vercel.app"
+      "https://skiplisalon.com"
     );
-    if (event.origin === "https://skipli-test-local-storage.vercel.app" && event.data !== "") {
+    if (event.origin === "https://skiplisalon.com") {
       this.setState({ uuid: event.data });
       localStorage.setItem("uuid", event.data);
       console.log("uuid saved in subdomain", event.data);
@@ -60,7 +60,7 @@ class App extends React.Component {
           }}
           id="subdomain-frame"
           title="Subdomain Frame"
-          src="https://skipli-test-local-storage.vercel.app"
+          src="https://skiplisalon.com"
         ></iframe>
       </div>
     );
