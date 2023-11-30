@@ -47,7 +47,7 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1>SUB DOMAIN SKIPLI LOCAL STORAGE</h1>
-          <p>UUID: {this.state.uuid}</p>
+          <p>UUID: {localStorage.getItem("uuid")}</p>
         </header>
         <iframe
           style={{
