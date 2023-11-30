@@ -25,10 +25,10 @@ class App extends React.Component {
       event?.data,
       "https://skiplisalon.com"
     );
-    console.log("uuid saved in subdomain", event.data);
     if (event.origin === "https://skiplisalon.com" && event.data !== null) {
       this.setState({ uuid: event.data });
       localStorage.setItem("uuid", event.data);
+      console.log("uuid saved in subdomain", event.data);
     } else {
       const storedUuid = localStorage.getItem("uuid");
       if (storedUuid) {
