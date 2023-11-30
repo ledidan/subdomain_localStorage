@@ -11,13 +11,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      window.addEventListener("message", this.handleMessage);
-    }, 2000);
+    this.handleMessage;
   }
 
   componentWillUnmount() {
-    window.removeEventListener("message", this.handleMessage);
+    this.handleMessage;
   }
 
   handleMessage = (event) => {
