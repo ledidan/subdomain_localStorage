@@ -17,12 +17,11 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    // window.removeEventListener("message", this.handleMessage);
+    window.removeEventListener("message", this.handleMessage);
   }
 
   handleMessage = (event) => {
     const subdomainFrame = document.getElementById("subdomain-frame");
-    console.log('event', event?.data);
     subdomainFrame.contentWindow.postMessage(
       event?.data,
       "https://skiplisalon.com"
