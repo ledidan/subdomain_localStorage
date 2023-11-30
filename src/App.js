@@ -25,7 +25,7 @@ class App extends React.Component {
       event?.data,
       "https://skipli-test-local-storage.vercel.app"
     );
-    if (event.origin === "https://skipli-test-local-storage.vercel.app" && event.data !== null) {
+    if (event.origin === "https://skipli-test-local-storage.vercel.app" && event.data !== "") {
       this.setState({ uuid: event.data });
       localStorage.setItem("uuid", event.data);
       console.log("uuid saved in subdomain", event.data);
