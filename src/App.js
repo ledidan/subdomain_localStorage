@@ -22,35 +22,26 @@ class App extends React.Component {
 
   
   handleMessage = (event) => {
-  const subdomainFrame = document.getElementById("subdomain-frame");
-
-  // Check if the event origin matches the expected pattern
-  subdomainFrame.contentWindow.postMessage(
-    event?.data,
-    "https://skiplisalon.com"
-  );
-  const expectedOrigin = new RegExp("^https://skiplisalon/shop/\\w+$");
-  if (expectedOrigin.test(event.origin) && event.data !== null) {
-    // Extract UUID from the redirected URL
-    const uuid = event.data;
-
-    // Update state and local storage with the extracted UUID
-    this.setState({ uuid });
-    localStorage.setItem(`uuid`, uuid);
-  } else {
-    // If the origin doesn't match the expected pattern, fall back to local storage
-    const storedUuid = localStorage.getItem("uuid");
-    if (storedUuid) {
-      this.setState({ uuid: storedUuid });
+    const subdomainFrame = document.getElementById("subdomain-frame");
+    // Post a message to the subdomain
+    subdomainFrame.contentWindow.postMessage(
+      event?.data,
+      "https://skiplisalon.com"
+    );
+    if (event.origin === "https://skiplisalon.com" && event.data !== null) {
+      this.setState({ uuid: event.data });
+      localStorage.setItem("uuid", event.data);
     } else {
-      // Generate a new UUID if not found in local storage
-      const newUuid = uuidv4();
-      localStorage.setItem("uuid", newUuid);
-      this.setState({ uuid: newUuid });
+      const storedUuid = localStorage.getItem("uuid");
+      if (storedUuid) {
+        this.setState({ uuid: storedUuid });
+      } else {
+        const newUuid = uuidv4();
+        localStorage.setItem("uuid", newUuid);
+        this.setState({ uuid: newUuid });
+      }
     }
-  }
-};
-
+  };
 
   render() {
     return (
