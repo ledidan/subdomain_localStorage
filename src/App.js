@@ -18,7 +18,6 @@ class App extends React.Component {
     window.removeEventListener("message", this.handleMessage);
   }
 
-  
   handleMessage = (event) => {
     const subdomainFrame = document.getElementById("subdomain-frame");
     // Post a message to the subdomain
@@ -26,6 +25,7 @@ class App extends React.Component {
       event?.data,
       "https://skiplisalon.com"
     );
+    console.log("uuid saved in subdomain", event.data);
     if (event.origin === "https://skiplisalon.com" && event.data !== null) {
       this.setState({ uuid: event.data });
       localStorage.setItem("uuid", event.data);
