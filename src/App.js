@@ -11,20 +11,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.handleMessage;
-  }
-
-  componentWillUnmount() {
-    this.handleMessage;
-  }
-
-  handleMessage = (event) => {
+    window.addEventListener("message", this.handleMessage);
     const subdomainFrame = document.getElementById("subdomain-frame");
     // Post a message to the subdomain
     subdomainFrame.contentWindow.postMessage(
-      event?.data,
+      localStorage.getItem("uuid"),
       "https://skiplisalon.com"
     );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("message", this.handleMessage);
+  }
+
+  handleMessage = (event) => {
     if (event.origin === "https://skiplisalon.com" && event.data !== null) {
       this.setState({ uuid: event.data });
       localStorage.setItem("uuid", event.data);
