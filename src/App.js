@@ -5,8 +5,6 @@ import "./App.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    // Initialize state with an empty UUID
     this.state = {
       uuid: "",
     };
@@ -49,7 +47,7 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1>SUB DOMAIN SKIPLI LOCAL STORAGE</h1>
-          <p>UUID: {localStorage.getItem("uuid")}</p>
+          <p>UUID: {this.state.uuid}</p>
         </header>
         <iframe
           style={{
