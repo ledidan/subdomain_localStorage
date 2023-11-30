@@ -11,11 +11,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("message", this.handleMessage);
+    // window.addEventListener("message", this.handleMessage);
+    console.log('message: ', 'Hello Guys');
   }
 
   componentWillUnmount() {
-    window.removeEventListener("message", this.handleMessage);
+    // window.removeEventListener("message", this.handleMessage);
   }
 
   handleMessage = (event) => {
