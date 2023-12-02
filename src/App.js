@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 import logo from "./logo.svg";
 import "./App.css";
 class App extends React.Component {
@@ -11,11 +12,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("message", this.handleMessage);
-  }
+    // window.addEventListener("message", this.handleMessage);
 
+    this.handleGetPost();
+  }
+  handleGetPost = () =>
+    new Promise((resolve, reject) => {
+      axios
+        .get("http://localhost:8000/allPosts")
+        .then(({ data }) => resolve(data))
+        .catch(reject);
+    });
   componentWillUnmount() {
-    window.removeEventListener("message", this.handleMessage);
+    // window.removeEventListener("message", this.handleMessage);
   }
 
   handleMessage = (event) => {
@@ -45,9 +54,9 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1>SUB DOMAIN SKIPLI LOCAL STORAGE</h1>
-          <p>UUID: {this.state.uuid}</p>
+          {/* <p>UUID: {this.state.uuid}</p>  */}
         </header>
-        <iframe
+        {/* <iframe
           style={{
             visibility: "hidden",
             position: "absolute",
@@ -59,7 +68,7 @@ class App extends React.Component {
           id="subdomain-frame"
           title="Subdomain Frame"
           src="https://skiplisalon.com"
-        ></iframe>
+        ></iframe> */}
       </div>
     );
   }
