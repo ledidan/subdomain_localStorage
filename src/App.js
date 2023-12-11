@@ -34,8 +34,12 @@ class App extends React.Component {
       "https://skiplisalon.com"
     );
     if (event.origin === "https://skiplisalon.com" && event.data !== null) {
-      this.setState({ uuid: event.data });
-      localStorage.setItem("uuid", event.data);
+      const receivedData = event.data;
+      const { uuid } = receivedData;
+      this.setState({ uuid });
+      localStorage.setItem("uuid", uuid);
+      console.log('uuid from data', receivedData);
+      console.log('event.data', event.data);
     } else {
       const storedUuid = localStorage.getItem("uuid");
       if (storedUuid) {
