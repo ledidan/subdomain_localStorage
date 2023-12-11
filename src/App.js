@@ -27,19 +27,16 @@ class App extends React.Component {
     window.removeEventListener("message", this.handleMessage);
   }
 
-  handleMessage = (event) => {
+  handleMessage = (event = {}) => {
     const subdomainFrame = document.getElementById("subdomain-frame");
-    subdomainFrame.contentWindow.postMessage(
-      event?.data,
-      "https://skiplisalon.com"
-    );
-    if (event.origin === "https://skiplisalon.com" && event.data !== null) {
-      const receivedData = event.data;
+    const { data, origin } = event;
+    subdomainFrame.contentWindow.postMessage(data, "https://skiplisalon.com");
+    if (origin === "https://skiplisalon.com" && data !== null) {
+      const receivedData = data;
       const { uuid } = receivedData;
       this.setState({ uuid });
       localStorage.setItem("uuid", uuid);
-      console.log('uuid from data', receivedData);
-      console.log('event.data', event.data);
+      console.log("uuid from data", uuid);
     } else {
       const storedUuid = localStorage.getItem("uuid");
       if (storedUuid) {
