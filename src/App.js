@@ -30,10 +30,10 @@ class App extends React.Component {
   handleMessage = (event = {}) => {
     const subdomainFrame = document.getElementById("subdomain-frame");
     const { data, origin } = event;
+    const receivedData = data;
+    const { uuid } = receivedData;
     subdomainFrame.contentWindow.postMessage(data, "https://skiplisalon.com");
-    if (origin === "https://skiplisalon.com" && data !== null) {
-      const receivedData = data;
-      const { uuid } = receivedData;
+    if (origin === "https://skiplisalon.com" && uuid !== null) {
       this.setState({ uuid });
       localStorage.setItem("uuid", uuid);
       console.log("uuid from data", uuid);
